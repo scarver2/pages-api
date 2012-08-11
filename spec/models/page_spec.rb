@@ -6,6 +6,12 @@ describe Page do
     page.title
   end
 
+  it "must have title" do
+    page = FactoryGirl.create(:page)
+    page.title = nil
+    page.should_not be_valid
+  end
+
   it "has content" do
     page = FactoryGirl.create(:page)
     page.content
