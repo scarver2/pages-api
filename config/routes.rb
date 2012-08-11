@@ -1,8 +1,18 @@
 PagesApiApp::Application.routes.draw do
-  namespace :api do 
-    resources :pages
+  namespace :api do
+    resources :pages do
+      member do
+        post 'unpublish'
+        match 'total_words'
+      end
+      
+      collection do
+        match 'published'
+        match 'unpublished'
+      end
+    end
   end
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

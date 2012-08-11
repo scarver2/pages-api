@@ -18,6 +18,7 @@ class Api::PagesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @page }
+      format.xml { render xml: @page }
     end
   end
 
@@ -29,6 +30,7 @@ class Api::PagesController < ApplicationController
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @page }
+      format.xml { render xml: @page }
     end
   end
 
@@ -44,11 +46,12 @@ class Api::PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
-        format.html { redirect_to @page, notice: 'Page was successfully created.' }
+        format.html { redirect_to api_page_path(@page), notice: 'Page was successfully created.' }
         format.json { render json: @page, status: :created, location: @page }
       else
         format.html { render action: "new" }
         format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.xml { render xml: @page.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -60,11 +63,13 @@ class Api::PagesController < ApplicationController
 
     respond_to do |format|
       if @page.update_attributes(params[:page])
-        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
+        format.html { redirect_to api_page_path(@page), notice: 'Page was successfully updated.' }
         format.json { head :no_content }
+        format.xml { head :no_content  }
       else
         format.html { render action: "edit" }
         format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.xml { render xml: @pages }
       end
     end
   end
@@ -76,8 +81,35 @@ class Api::PagesController < ApplicationController
     @page.destroy
 
     respond_to do |format|
-      format.html { redirect_to pages_url }
+      format.html { redirect_to api_pages_url }
       format.json { head :no_content }
+      format.xml { head :no_content  }
+    end
+  end
+  
+  def published
+    @pages = Page.published
+    respond_to do |format|
+      format.html # published.html.erb
+      format.json { render json: @pages }
+      format.xml { render xml: @pages }
+    end
+  end
+  
+  def unpublished
+    @pages = Page.unpublished
+    respond_to do |format|
+      format.html # unpublished.html.erb
+      format.json { render json: @pages }
+      format.xml { render xml: @pages }
+    end
+  end
+  
+  def total_words
+    @page = Page.find(params[:id])
+    respond_to do |format|
+      format.html { render text: @page.total_word_count }
+      format.json { render text: @page.total_word_count }
     end
   end
 end
