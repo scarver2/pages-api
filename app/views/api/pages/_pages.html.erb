@@ -16,6 +16,13 @@
     <td><%= link_to 'Show', api_page_path(page) %></td>
     <td><%= link_to 'Edit', edit_api_page_path(page) %></td>
     <td><%= link_to 'Destroy', api_page_path(page), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+			<% if page.published_on %>
+				<%= link_to 'Unpublish', unpublish_api_page_path(page), method: :post %>
+			<% else %>
+				<%= link_to 'Publish', publish_api_page_path(page), method: :post %>
+			<% end %>
+		</td>
   </tr>
 <% end %>
 </table>
