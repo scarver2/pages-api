@@ -4,12 +4,16 @@ class Page < ActiveRecord::Base
   validates_presence_of :content, :title
   validates_uniqueness_of :title
 
-  scope :published, where('published_on IS NOT NULL')
-  scope :unpublished, where('published_on IS NULL')
+  scope :published, where('published_on IS NOT NULL').order('published_on DESC')
+  scope :unpublished, where('published_on IS NULL').order('updated_at DESC')
   
   def publish
     # set publication date unless already set
-    update_attribute(:published_on, Time.now) unless published_on
+    if published_on
+      errors.add :base, "Page has already been published."      
+    else
+      update_attribute(:published_on, Time.now)
+    end
   end
   
   def unpublish
