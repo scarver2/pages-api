@@ -1,8 +1,0 @@
-== Welcome to Pages API
-
-Install gems:
-bundle
-
-Run tests:
-bundle exec guard
-

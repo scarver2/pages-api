@@ -1,0 +1,36 @@
+h1. Welcome to Pages API
+
+h2. Setup
+
+*Install gems:*
+bundle
+
+*Run rspec tests:*
+bundle exec guard
+
+
+h2. JSON Interface
+
+
+
+*Create Page*
+curl -d "page[title]=Hello%20JSON&page[content]=test%20from%20JSON." http://lit-refuge-3562.herokuapp.com/api/pages.json
+
+h2. XML Interface
+
+*Create Page*
+curl -d "page[title]=Hello%20XML&page[content]=test%20from%20XML." http://lit-refuge-3562.herokuapp.com/api/pages.xml
+
+*List Pages*
+curl http://lit-refuge-3562.herokuapp.com/api/pages.xml
+
+*List Published Pages*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/published.xml
+
+*List Unpublished Pages*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/unpublished.xml
+
+*Get Specific Page*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/1.xml
+
+
