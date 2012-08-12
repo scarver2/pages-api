@@ -1,62 +1,55 @@
 require 'spec_helper'
 
 describe "Api::Pages" do
-  describe "GET /api/pages" do
-    it "works" do
-      get api_pages_path
-      response.status.should be(200)
-    end
+  it "GET /api/pages" do
+    get api_pages_path
+    response.should be_success
   end
 
-  describe "POST /api/pages" do
-    it "works" do
-      post api_pages_path
-      response.status.should be(200)
-    end
+  it "POST /api/pages" do
+    post api_pages_path, page: { title: Faker::Lorem.sentence, content: Faker::Lorem.paragraph }
+    post api_pages_path
+    response.should be_success
   end
 
-  describe "GET /api/pages/new" do
-    it "works" do
-      get new_api_pages_path
-      response.status.should be(200)
-    end
+  it "GET /api/pages/new" do
+    get new_api_page_path
+    response.should be_success
   end
 
-  describe "GET /api/pages/edit" do
-    it "works" do
-      get edit_api_pages_path
-      response.status.should be(200)
-    end
+  it "GET /api/pages/edit" do
+    page = FactoryGirl.create(:page)
+    get edit_api_page_path(page)
+    response.should be_success
   end
 
-  describe "GET /api/pages/published" do
-    it "works" do
-      get published_api_pages_path
-      response.status.should be(200)
-    end
+  it "GET /api/pages/published" do
+    get published_api_pages_path
+    response.should be_success
   end
 
-  describe "GET /api/pages/unpublished" do
-    it "works" do
-      get unpublished_api_pages_path
-      response.status.should be(200)
-    end
+  it "GET /api/pages/unpublished" do
+    get unpublished_api_pages_path
+    response.should be_success
   end
 
-  describe "POST /api/pages/unpublish" do
-    it "works" do
-      post published_api_page_path
-      response.status.should be(200)
-    end
+  it "POST /api/pages/:id/publish" do
+    page = FactoryGirl.create(:page)
+    post publish_api_page_path(page)
+    response.should be_redirect
   end
 
-  describe "GET /api/pages/total_words" do
-    it "works" do
-      # NOTE: this treats compounded, hyphenated words as a single word e.g. well-formed == 1
-      page = FactoryGirl.create(:page)
-      get total_words_api_page_path
-      response.status.should be(200)
-      response.content.should page.title.split.size + page.content.split.size
-    end
+  it "GET /api/pages/:id/total_words" do
+    # NOTE: this treats hyphenated words as a single word e.g. well-formed == 1
+    page = FactoryGirl.create(:page)
+    get total_words_api_page_path(page)
+    response.should be_success
+    # puts "response.body: #{response.body}"
+    # ap page
+    # puts "page.total_word_count: #{page.total_word_count}"
+    # response.body.should have_content(page.total_word_count)
+    # response.should have_content(page.total_word_count)
+    response.body.should == page.total_word_count.to_s
+    # response.content.should page.title.split.size + page.content.split.size
   end
 end

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 
+gem 'awesome_print'
 gem 'exception_notification'
 gem 'jbuilder'
 gem 'jquery-rails'
@@ -18,6 +19,8 @@ end
 
 group :development, :test do
   gem 'bullet'
+  gem 'capybara'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker', git: 'git://github.com/statique/faker.git'
   gem 'guard-rspec'
@@ -25,6 +28,7 @@ group :development, :test do
   # gem 'growl_notify' # Snow Leopard
   # gem 'ruby-growl' # Snow Leopard
   # gem 'ruby_gntp' # Lion
+  gem 'launchy'
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails'

@@ -18,9 +18,20 @@ describe Page do
   end
 
   it "returns total word count" do
-    page = FactoryGirl.create(:page)
+    page = FactoryGirl.build(:page)
     page.title = "Hello"
     page.content = "World"
     page.total_word_count == 2
+  end
+  
+  it "can publish" do
+    page = FactoryGirl.build(:page)
+    page.publish
+  end
+
+  it "can unpublish" do
+    page = FactoryGirl.create(:page)
+    page.publish
+    page.unpublish
   end
 end
