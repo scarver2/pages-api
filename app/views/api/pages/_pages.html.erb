@@ -19,7 +19,7 @@
     <td>
 			<%# FUTURE: if page.published_on %>
 				<%# FUTURE: = link_to 'Unpublish', unpublish_api_page_path(page), method: :post %>
-			<% if page.published_on %>
+			<% unless page.published_on %>
 				<%= link_to 'Publish', publish_api_page_path(page), method: :post %>
 			<% end %>
 		</td>
