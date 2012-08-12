@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120811164819) do
+ActiveRecord::Schema.define(:version => 20120812022817) do
 
   create_table "pages", :force => true do |t|
     t.string   "title",        :null => false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(:version => 20120811164819) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "pages", ["published_on"], :name => "index_pages_on_published_on"
   add_index "pages", ["title"], :name => "index_pages_on_title", :unique => true
 
 end
