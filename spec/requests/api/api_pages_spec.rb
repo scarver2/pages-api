@@ -1,3 +1,4 @@
+=begin
 require 'spec_helper'
 
 describe "Api::Pages" do
@@ -53,3 +54,4 @@ describe "Api::Pages" do
     # response.content.should page.title.split.size + page.content.split.size
   end
 end
+=end
