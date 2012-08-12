@@ -8,18 +8,72 @@ bundle
 *Run rspec tests:*
 bundle exec guard
 
+h2. Page Object
+
+title (string, required, unique) 
+content (string, required) 
+published_on (datetime, optional) 
+created_at (datetime)
+updated_at (datetime)
+
+h2. API
+
+Pages API is a standard RESTful interface using JSON and XML formats.
+
+Also includes special routes:
+
+Return a list of published pages sorted by most recent publication date. 
+GET /api/pages/published
+
+Return a list of unpublished pages sorted by most recent <span style="color:red;text-decoration:line-through;">publication date<span> edit date. 
+GET	/api/pages/unpublished
+
+Set a Page to published immediately	
+POST /api/pages/:id/publish
+
+Return the total number of words (title and content) for the given page
+GET /api/pages/:id/total_words
+
+An example of this Pages API is hosted at Heroku. http://lit-refuge-3562.herokuapp.com/api/pages
 
 h2. JSON Interface
 
+*Create Page*
+curl -X POST -H "Accept: application/json" -d "page[title]=Hello%20JSON&page[content]=test%20from%20JSON." http://lit-refuge-3562.herokuapp.com/api/pages.json
 
+curl -X POST -d '' http://127.0.0.1:3000/api/pages/11/publish
 
 *Create Page*
-curl -d "page[title]=Hello%20JSON&page[content]=test%20from%20JSON." http://lit-refuge-3562.herokuapp.com/api/pages.json
+curl -X POST -d "page[title]=Hello%20XML&page[content]=test%20from%20XML." http://lit-refuge-3562.herokuapp.com/api/pages.json
+
+*List Pages*
+curl http://lit-refuge-3562.herokuapp.com/api/pages.json
+
+*List Published Pages*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/published.json
+
+*List Unpublished Pages*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/unpublished.json
+
+*Get a Specific Page*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/2.json
+
+*Edit a Specific Page*
+curl -X PUT -d "page[title]=Goodbye" http://lit-refuge-3562.herokuapp.com/api/pages/2.json
+
+*Get the Total Word Count of a Specific Page*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/2/total_words.json
+
+*Publish a Page*
+curl -X POST -d '' http://lit-refuge-3562.herokuapp.com/api/pages/2/publish.json
+
+*Delete a Page*
+curl -X DELETE http://lit-refuge-3562.herokuapp.com/api/pages/2.json
 
 h2. XML Interface
 
 *Create Page*
-curl -d "page[title]=Hello%20XML&page[content]=test%20from%20XML." http://lit-refuge-3562.herokuapp.com/api/pages.xml
+curl -X POST -d "page[title]=Hello%20XML&page[content]=test%20from%20XML." http://lit-refuge-3562.herokuapp.com/api/pages.xml
 
 *List Pages*
 curl http://lit-refuge-3562.herokuapp.com/api/pages.xml
@@ -30,7 +84,18 @@ curl http://lit-refuge-3562.herokuapp.com/api/pages/published.xml
 *List Unpublished Pages*
 curl http://lit-refuge-3562.herokuapp.com/api/pages/unpublished.xml
 
-*Get Specific Page*
-curl http://lit-refuge-3562.herokuapp.com/api/pages/1.xml
+*Get a Specific Page*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/3.xml
 
+*Edit a Specific Page*
+curl -X PUT -d "page[title]=Goodbye" http://lit-refuge-3562.herokuapp.com/api/pages/3.xml
+
+*Get the Total Word Count of a Specific Page*
+curl http://lit-refuge-3562.herokuapp.com/api/pages/3/total_words.xml
+
+*Publish a Page*
+curl -X POST -d '' http://lit-refuge-3562.herokuapp.com/api/pages/3/publish.xml
+
+*Delete a Page*
+curl -X DELETE http://lit-refuge-3562.herokuapp.com/api/pages/3.xml
 
