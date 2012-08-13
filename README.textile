@@ -34,7 +34,7 @@ POST /api/pages/:id/publish
 Return the total number of words (title and content) for the given page
 GET /api/pages/:id/total_words
 
-An example of this Pages API is hosted at Heroku. http://lit-refuge-3562.herokuapp.com/api/pages
+An example of this Pages API is hosted at Heroku. http://lit-refuge-3562.herokuapp.com/
 
 h2. JSON Interface
 
